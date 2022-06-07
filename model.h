@@ -27,7 +27,6 @@ public:
     std::vector<std::vector<double>> GetSystemTimeStats() const;
     std::vector<std::vector<double>> GetFinalServiceWaitingTimeStats() const;
     std::vector<std::vector<double>> GetNodeTimeSpentStats() const;
-
     void reset();
 
 signals:
@@ -52,7 +51,6 @@ private:
     std::vector<std::vector<double>> node_time_spent_; // среднее время, которое заявка проводит в конкретном узле (а не в системе)
     std::queue<Job> jobs_to_process_;
     bool simulation_stop = false;
-
     int GetRespectiveNodeId(int job_type) const;
 };
 

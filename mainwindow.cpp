@@ -65,7 +65,6 @@ void MainWindow::on_pushButton_clicked() {
         if (checkInputs()) {
             disableInput();
             ui->progressBar->show();
-
             // запуск симуляции в отдельном потоке
             QFuture<void> result = QtConcurrent::run(startSimulation, this);
             QFutureWatcher<void> *watcher = new QFutureWatcher<void>(this);
@@ -74,10 +73,8 @@ void MainWindow::on_pushButton_clicked() {
             watcher->setFuture(result);
         }
     }
-    else {
-        if (model != nullptr) {
-            model->stop();
-        }
+    else if (model != nullptr) {
+        model->stop();
     }
 }
 
@@ -215,7 +212,6 @@ void MainWindow::startSimulation() {
     connect(model, &Model::progressChanged, this, onProgressChange, Qt::BlockingQueuedConnection);
     connect(model, &Model::processInfoChanged, this, onProcessInfoChange);
     connect(this, iterationNumberChanged, this, onIterationNumberChange);
-    connect(this, stopSimulation, model, &Model::stop);
 
     bool simulation_check;
     auto simulation_start = std::chrono::steady_clock::now();
@@ -456,6 +452,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
    if (model != nullptr) {
        model->stop();
    }
+   event->accept();
 }
 
 void MainWindow::on_show_plot_clicked() {

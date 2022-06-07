@@ -34,7 +34,6 @@ void Node::JobArrival(Job& job, double arrival_time) {
         ++busy_upon_arrival_count_;
         job.SetQueueStart(arrival_time);
         queued_jobs_.push(job);
-
     }
     current_job_count_time_ = arrival_time;
     total_system_time_ = arrival_time;
@@ -157,8 +156,4 @@ int Node::GetBusyUponArrivalCount() const {
 
 int Node::GetFalseArrivalCount() const {
     return false_arrival_count_;
-}
-
-double Node::GetCurrentQueueLengthTime() const {
-    return current_job_count_time_;
 }

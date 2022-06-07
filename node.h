@@ -36,26 +36,19 @@ public:
 private:
     int node_type_;
     double mu_;
+    ProcessDistr err_distr_;
+    double scaling_par_;
     std::queue<Job> process_jobs_;
     std::queue<Job> queued_jobs_;
-
     double idle_start_ = 0;
     double idle_end_ = 0;
     double idle_time_ = 0;
     double total_system_time_ = 0;
     double current_job_count_time_ = 0;
-
-    ProcessDistr err_distr_;
-    double scaling_par_;
-
     std::vector<double> job_count_duration_;
     std::vector<double> queue_waiting_times_;
-
     int busy_upon_arrival_count_ = 0;
     int false_arrival_count_ = 0;
-
-    double GetCurrentQueueLengthTime() const;
-    double GetQueueLengthSum() const;
 };
 
 #endif // NODE_H

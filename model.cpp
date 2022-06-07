@@ -73,7 +73,6 @@ bool Model::StartSimulation(quint64 count) {
                         departing_job_node_type = 1 - num_of_node;
                     }
                 }
-
             }
             else {
                 if (other_node.HasFreeServerAvailable()) {
@@ -171,7 +170,7 @@ bool Model::BatchArrival(quint64 count) {
 
         double arrival_time = temp_arrival_times[next_job_type];
         Job job(next_job_type, arrival_time);
-        int corresp_node_ind = GetRespectiveNodeId(next_job_type);
+        int corresp_node_ind = GetRespectiveNodeId(next_job_type); // классифицируем заявку
         job.SetAssignedNode(corresp_node_ind);
         ++node_count[corresp_node_ind];
         prev_arrival_times_[next_job_type] = arrival_time;
@@ -180,7 +179,7 @@ bool Model::BatchArrival(quint64 count) {
 
         if (progress < static_cast<int>(static_cast<double>(k) * 100 / count)) {
             progress = static_cast<int>(static_cast<double>(k) * 100 / count);
-            emit progressChanged(progress);
+            emit progressChanged(progress); // оповещаем о состоянии прогресса обработки заявок
         }
     }
     return true;

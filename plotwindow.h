@@ -24,7 +24,6 @@ signals:
 
 private slots:
     void on_save_first_plot_clicked();
-
     void on_save_second_plot_clicked();
 
 private:
